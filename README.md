@@ -36,6 +36,7 @@ Arabic (`ar`), Bulgarian (`bg`), Croatian (`hr`), Czech (`cs`), Danish (`da`), D
 
 ### 📰 Update News
 
+- **2026.05.18** - Python SDK v1.3.1 adds **`supertonic serve`**, a local HTTP server with native `/v1/tts` and OpenAI-compatible `/v1/audio/speech` endpoints. See the [serve documentation](https://supertone-inc.github.io/supertonic-py/cli/serve/).
 - **2026.05.18** - **[Voice Builder](https://supertonic.supertone.ai/voice-builder)** now supports **Supertonic 3**. Create a permanent custom voice profile for Supertonic and download version-specific JSON files for both Supertonic 2 and Supertonic 3. If you already created a Supertonic 2 voice, the matching Supertonic 3 JSON is now available from [My Page](https://supertonic.supertone.ai/my-page).
 - **2026.04.29** - 🎉 **Supertonic 3** released with **31-language support**, improved reading accuracy, fewer repeat/skip failures, and v2-compatible public ONNX assets. [Demo](https://huggingface.co/spaces/Supertone/supertonic-3) | [Models](https://huggingface.co/Supertone/supertonic-3)
 - **2026.01.22** - **[Voice Builder](https://supertonic.supertone.ai/voice-builder)** is now live! Turn your voice into a deployable, edge-native TTS with permanent ownership.
@@ -83,6 +84,17 @@ tts.save_audio(wav, "output.wav")
 
 print(f"Generated {duration[0]:.2f}s of audio")
 ```
+
+### Local HTTP Server
+
+The Python SDK can also run Supertonic as a local HTTP service. This is useful when you want to call Supertonic from tools that already speak HTTP, such as local agents, browser extensions, Electron apps, workflow automation tools, or OpenAI-compatible audio clients.
+
+```bash
+pip install 'supertonic[serve]'
+supertonic serve --host 127.0.0.1 --port 7788
+```
+
+Once running, use the native `POST /v1/tts` endpoint or the OpenAI-compatible `POST /v1/audio/speech` endpoint. The server also exposes interactive OpenAPI docs at `http://127.0.0.1:7788/docs`. See the [supertonic-py serve guide](https://supertone-inc.github.io/supertonic-py/cli/serve/) for request examples, batch synthesis, and custom Voice Builder JSON import.
 
 ## Getting Started
 
